@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Mbua Nene Initiative's ongoing and completed projects across education, healthcare, water access, and community development in Kenya.">
+    <meta name="keywords" content="projects, education, healthcare, water, community development, Kenya, charity projects, impact">
+    <title>Our Projects - Mbua Nene Initiative</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- Additional Projects Page Styles -->
+    <style>
+        /* Project Filter Styles */
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .project-filter {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-green);
+            background: transparent;
+            color: var(--primary-green);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .project-filter:hover,
+        .project-filter.active {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Project Cards Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-category {
+            display: inline-block;
+            background: var(--primary-green-light);
+            color: var(--white);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .project-progress {
+            margin: 1rem 0;
+        }
+        
+        .project-progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-ongoing {
+            color: var(--accent-orange);
+        }
+        
+        .status-completed {
+            color: var(--primary-green);
+        }
+        
+        .status-planned {
+            color: var(--medium-gray);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        /* Project Modal Styles */
+        .project-modal .modal-content {
+            max-width: 800px;
+            max-height: 90vh;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .modal-category {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+        }
+        
+        .modal-stat {
+            text-align: center;
+        }
+        
+        .modal-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            display: block;
+        }
+        
+        .modal-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .modal-section {
+            margin: 1.5rem 0;
+        }
+        
+        .modal-section h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+        
+        .modal-section p,
+        .modal-section li {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .modal-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-filters {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+            
+            .project-filter {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .modal-actions .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <img src="/assets/images/logo.png" alt="Mbua Nene Initiative Logo" width="40" height="40" style="display: none;">
+                Mbua Nene Initiative
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link active" aria-current="page">Projects</a></li>
+                <li><a href="get-involved.html" class="nav-link">Get Involved</a></li>
+                <li><a href="donate.html" class="nav-link btn btn-primary">Donate</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" style="padding: 6rem 0 4rem; background: linear-gradient(135deg, rgba(46, 139, 87, 0.9), rgba(60, 179, 113, 0.8)), url('/assets/images/projects-hero.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Our Projects</h1>
+                    <p>Discover the transformative initiatives we're implementing across Kenya, from education and healthcare to water access and economic development.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Filters and Gallery -->
+        <section class="section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Transforming Communities</h2>
+                    <p>Explore our projects by category to see how we're making a difference across various sectors.</p>
+                </div>
+                
+                <!-- Project Filters -->
+                <div class="project-filters">
+                    <button class="project-filter active" data-filter="all">All Projects</button>
+                    <button class="project-filter" data-filter="education">Education</button>
+                    <button class="project-filter" data-filter="healthcare">Healthcare</button>
+                    <button class="project-filter" data-filter="water">Water & Sanitation</button>
+                    <button class="project-filter" data-filter="economic">Economic Development</button>
+                    <button class="project-filter" data-filter="women">Women's Empowerment</button>
+                </div>
+                
+                <!-- Projects Grid -->
+                <div class="projects-grid">
+                    <!-- Education Projects -->
+                    <article class="project-card fade-in" data-category="education" data-modal="education-project-1">
+                        <img src="/assets/images/project-school-1.jpg" alt="Kiambu Primary School construction" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Education</span>
+                            <h3 class="project-title">Kiambu Primary School</h3>
+                            <p class="project-description">Building a modern 8-classroom primary school to serve 400 children in Kiambu County, complete with library and computer lab.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-completed">
+                                        <span class="status-dot"></span>
+                                        Completed
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%" style="width: 100%;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $125,000 of $125,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in" data-category="education" data-modal="education-project-2">
+                        <img src="/assets/images/project-library.jpg" alt="Community library construction" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Education</span>
+                            <h3 class="project-title">Meru Community Library</h3>
+                            <p class="project-description">Establishing a community library with 5,000 books and digital learning resources to support literacy programs.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-ongoing">
+                                        <span class="status-dot"></span>
+                                        In Progress
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="78%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $45,000 of $58,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Healthcare Projects -->
+                    <article class="project-card fade-in" data-category="healthcare" data-modal="healthcare-project-1">
+                        <img src="/assets/images/project-clinic.jpg" alt="Mobile health clinic" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Healthcare</span>
+                            <h3 class="project-title">Mobile Health Clinics</h3>
+                            <p class="project-description">Fleet of 3 mobile clinics providing primary healthcare services to remote communities across 5 counties.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-ongoing">
+                                        <span class="status-dot"></span>
+                                        In Progress
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="65%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $97,500 of $150,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in" data-category="healthcare" data-modal="healthcare-project-2">
+                        <img src="/assets/images/project-maternity.jpg" alt="Maternity ward construction" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Healthcare</span>
+                            <h3 class="project-title">Nakuru Maternity Ward</h3>
+                            <p class="project-description">Constructing a modern maternity ward to reduce maternal and infant mortality rates in rural Nakuru.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-planned">
+                                        <span class="status-dot"></span>
+                                        Planning
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="25%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $18,750 of $75,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Water Projects -->
+                    <article class="project-card fade-in" data-category="water" data-modal="water-project-1">
+                        <img src="/assets/images/project-well.jpg" alt="Water well drilling" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Water & Sanitation</span>
+                            <h3 class="project-title">Clean Water Wells</h3>
+                            <p class="project-description">Drilling 15 water wells across rural communities to provide clean, safe drinking water to 3,000 people.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-ongoing">
+                                        <span class="status-dot"></span>
+                                        In Progress
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="87%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $78,300 of $90,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in" data-category="water" data-modal="water-project-2">
+                        <img src="/assets/images/project-sanitation.jpg" alt="Sanitation facilities" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Water & Sanitation</span>
+                            <h3 class="project-title">School Sanitation Program</h3>
+                            <p class="project-description">Installing proper sanitation facilities in 20 schools to improve hygiene and reduce disease transmission.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-completed">
+                                        <span class="status-dot"></span>
+                                        Completed
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="100%" style="width: 100%;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $60,000 of $60,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Economic Development Projects -->
+                    <article class="project-card fade-in" data-category="economic" data-modal="economic-project-1">
+                        <img src="/assets/images/project-microfinance.jpg" alt="Microfinance program" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Economic Development</span>
+                            <h3 class="project-title">Microfinance Initiative</h3>
+                            <p class="project-description">Providing small loans and business training to 200 entrepreneurs to start or expand their businesses.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-ongoing">
+                                        <span class="status-dot"></span>
+                                        In Progress
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="72%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $36,000 of $50,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card fade-in" data-category="economic" data-modal="economic-project-2">
+                        <img src="/assets/images/project-farming.jpg" alt="Agricultural training program" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Economic Development</span>
+                            <h3 class="project-title">Sustainable Farming Program</h3>
+                            <p class="project-description">Training 500 farmers in sustainable agricultural practices and providing seeds and tools.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-planned">
+                                        <span class="status-dot"></span>
+                                        Planning
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="15%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $11,250 of $75,000</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Women's Empowerment Projects -->
+                    <article class="project-card fade-in" data-category="women" data-modal="women-project-1">
+                        <img src="/assets/images/project-womens-center.jpg" alt="Women's empowerment center" class="project-image">
+                        <div class="project-content">
+                            <span class="project-category">Women's Empowerment</span>
+                            <h3 class="project-title">Women's Skills Center</h3>
+                            <p class="project-description">Establishing a training center for women to learn marketable skills like tailoring, crafts, and business management.</p>
+                            <div class="project-progress">
+                                <div class="project-progress-label">
+                                    <span><strong>Progress:</strong></span>
+                                    <span class="project-status status-ongoing">
+                                        <span class="status-dot"></span>
+                                        In Progress
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" data-width="55%" style="width: 0;"></div>
+                                </div>
+                                <p><strong>Raised:</strong> $27,500 of $50,000</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Support Our Projects</h2>
+                    <p class="mb-4">Every contribution helps us complete these vital projects and start new ones. Together, we can create lasting change in communities across Kenya.</p>
+                    
+                    <div class="flex-center" style="gap: 1rem; flex-wrap: wrap;">
+                        <a href="donate.html" class="btn btn-accent btn-lg">Donate Now</a>
+                        <a href="get-involved.html" class="btn btn-secondary btn-lg">Volunteer</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Modals -->
+    <!-- Education Project 1 Modal -->
+    <div id="education-project-1" class="modal project-modal" role="dialog" aria-labelledby="modal-title-1" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h3 id="modal-title-1" class="modal-title">Kiambu Primary School</h3>
+            </div>
+            <span class="modal-category">Education</span>
+            <img src="/assets/images/project-school-1-detail.jpg" alt="Completed Kiambu Primary School" class="modal-image">
+            
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span class="modal-stat-number">400</span>
+                    <span class="modal-stat-label">Students Enrolled</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-number">8</span>
+                    <span class="modal-stat-label">Classrooms</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-number">25</span>
+                    <span class="modal-stat-label">Teachers</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-number">2023</span>
+                    <span class="modal-stat-label">Completed</span>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Project Overview</h4>
+                <p>The Kiambu Primary School project transformed education access for children in rural Kiambu County. This modern facility features 8 fully-equipped classrooms, a library, computer lab, and administrative offices.</p>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Impact Achieved</h4>
+                <ul>
+                    <li>400 children now have access to quality primary education</li>
+                    <li>25 teachers employed, boosting local economy</li>
+                    <li>100% increase in school enrollment in the area</li>
+                    <li>Digital literacy programs reach 200+ students</li>
+                    <li>Community pride and engagement significantly improved</li>
+                </ul>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Community Feedback</h4>
+                <p><em>"This school has given our children hope for a better future. We are so grateful to Mbua Nene Initiative for believing in our community."</em> - Grace Mwangi, Parent and Community Leader</p>
+            </div>
+            
+            <div class="modal-actions">
+                <a href="donate.html" class="btn btn-accent">Support Similar Projects</a>
+                <button class="btn btn-secondary" onclick="window.MbuaNeneInitiative.closeModal(document.getElementById('education-project-1'))">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Healthcare Project 1 Modal -->
+    <div id="healthcare-project-1" class="modal project-modal" role="dialog" aria-labelledby="modal-title-2" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-header">
+                <h3 id="modal-title-2" class="modal-title">Mobile Health Clinics</h3>
+            </div>
+            <span class="modal-category">Healthcare</span>
+            <img src="/assets/images/project-clinic-detail.jpg" alt="Mobile health clinic in action" class="modal-image">
+            
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span class="modal-stat-number">3</span>
+                    <span class="modal-stat-label">Mobile Units</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-number">15</span>
+                    <span class="modal-stat-label">Communities Served</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-number">2,500</span>
+                    <span class="modal-stat-label">Patients Treated</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-number">12</span>
+                    <span class="modal-stat-label">Medical Staff</span>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Project Overview</h4>
+                <p>Our mobile health clinic program brings essential medical services directly to remote communities that lack access to healthcare facilities. Each clinic is equipped with modern medical equipment and staffed by qualified healthcare professionals.</p>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Services Provided</h4>
+                <ul>
+                    <li>Primary healthcare consultations</li>
+                    <li>Maternal and child health services</li>
+                    <li>Vaccination programs</li>
+                    <li>Health education and disease prevention</li>
+                    <li>Emergency medical care</li>
+                    <li>Chronic disease management</li>
+                </ul>
+            </div>
+            
+            <div class="modal-section">
+                <h4>Current Progress</h4>
+                <p>We have successfully deployed 2 mobile clinics and are raising funds for the third unit. The response from communities has been overwhelmingly positive, with significant improvements in health outcomes.</p>
+            </div>
+            
+            <div class="modal-actions">
+                <a href="donate.html" class="btn btn-accent">Fund Third Clinic</a>
+                <button class="btn btn-secondary" onclick="window.MbuaNeneInitiative.closeModal(document.getElementById('healthcare-project-1'))">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mbua Nene Initiative</h3>
+                    <p>Empowering communities through education, healthcare, and sustainable development in Kenya.</p>
+                    <div class="social-links" style="margin-top: 1rem;">
+                        <a href="https://facebook.com/mbuaneneinitiative" aria-label="Follow us on Facebook" style="margin-right: 1rem;">
+                            <img src="/assets/icons/facebook.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://twitter.com/mbuaneneinitiative" aria-label="Follow us on Twitter" style="margin-right: 1rem;">
+                            <img src="/assets/icons/twitter.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://instagram.com/mbuaneneinitiative" aria-label="Follow us on Instagram">
+                            <img src="/assets/icons/instagram.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <nav aria-label="Footer navigation">
+                        <a href="about.html">About Us</a><br>
+                        <a href="projects.html">Our Projects</a><br>
+                        <a href="get-involved.html">Get Involved</a><br>
+                        <a href="donate.html">Donate</a><br>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Focus Areas</h3>
+                    <p>Education & Literacy</p>
+                    <p>Healthcare Access</p>
+                    <p>Clean Water & Sanitation</p>
+                    <p>Economic Development</p>
+                    <p>Women's Empowerment</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@mbuaneneinitiative.org</p>
+                    <p>Phone: +254 700 123 456</p>
+                    <p>Address: Nairobi, Kenya</p>
+                    <p>Hours: Mon-Fri 8AM-5PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mbua Nene Initiative. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

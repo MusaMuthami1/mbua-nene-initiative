@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support Mbua Nene Initiative with a secure donation. Choose from one-time or recurring donations to help transform communities in Kenya.">
+    <meta name="keywords" content="donate, donation, support, charity, Kenya, secure payment, recurring donation, community development">
+    <title>Donate - Support Our Mission | Mbua Nene Initiative</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- Additional Donate Page Styles -->
+    <style>
+        /* Donation Form Styles */
+        .donation-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .form-header h2 {
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        .form-header p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+        }
+        
+        .form-content {
+            padding: 2rem;
+        }
+        
+        /* Amount Selection */
+        .amount-selection {
+            margin-bottom: 2rem;
+        }
+        
+        .amount-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .amount-btn {
+            padding: 1rem;
+            border: 2px solid var(--primary-green);
+            background: transparent;
+            color: var(--primary-green);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .amount-btn:hover,
+        .amount-btn.active {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .amount-btn .amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .amount-btn .description {
+            font-size: 0.875rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .custom-amount {
+            margin-top: 1rem;
+        }
+        
+        .custom-amount label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .custom-amount-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1.125rem;
+            text-align: center;
+        }
+        
+        .custom-amount-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+        }
+        
+        /* Donation Type */
+        .donation-type {
+            margin-bottom: 2rem;
+        }
+        
+        .donation-frequency {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .frequency-option {
+            position: relative;
+        }
+        
+        .frequency-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .frequency-label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: var(--white);
+        }
+        
+        .frequency-option input:checked + .frequency-label {
+            border-color: var(--primary-green);
+            background: rgba(46, 139, 87, 0.1);
+            color: var(--primary-green);
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .payment-option {
+            position: relative;
+        }
+        
+        .payment-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .payment-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: var(--white);
+        }
+        
+        .payment-option input:checked + .payment-label {
+            border-color: var(--primary-green);
+            background: rgba(46, 139, 87, 0.1);
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Payment Details */
+        .payment-details {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+        }
+        
+        .payment-details.active {
+            display: block;
+        }
+        
+        .card-inputs {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mpesa-input {
+            margin-bottom: 1rem;
+        }
+        
+        /* Personal Information */
+        .personal-info {
+            margin-bottom: 2rem;
+        }
+        
+        .name-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        /* Security Features */
+        .security-info {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        .security-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+            font-size: 1rem;
+        }
+        
+        .security-features {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .security-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .security-icon {
+            color: var(--primary-green);
+        }
+        
+        /* Campaign Progress */
+        .campaign-progress {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+        }
+        
+        .campaign-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .campaign-stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .campaign-progress-bar {
+            margin: 1rem 0;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Donation Success Modal */
+        .success-modal .modal-content {
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin: 0 auto 1rem;
+            animation: pulse 1s ease-in-out infinite alternate;
+        }
+        
+        .donation-summary {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-item:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 1rem;
+            }
+            
+            .amount-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .name-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .donation-frequency {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .campaign-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .security-features {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <img src="/assets/images/logo.png" alt="Mbua Nene Initiative Logo" width="40" height="40" style="display: none;">
+                Mbua Nene Initiative
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="get-involved.html" class="nav-link">Get Involved</a></li>
+                <li><a href="donate.html" class="nav-link active" aria-current="page">Donate</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" style="padding: 6rem 0 4rem; background: linear-gradient(135deg, rgba(46, 139, 87, 0.9), rgba(60, 179, 113, 0.8)), url('/assets/images/donate-hero.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Make a Difference Today</h1>
+                    <p>Your generous donation helps us empower communities across Kenya through education, healthcare, and sustainable development programs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaign Progress -->
+        <section class="section">
+            <div class="container">
+                <div class="campaign-progress">
+                    <h2 class="text-center mb-3">Current Campaign: Emergency Education Fund</h2>
+                    <p class="text-center mb-4">Help us build 5 new classrooms for 300 children who currently learn under trees.</p>
+                    
+                    <div class="campaign-stats">
+                        <div class="campaign-stat">
+                            <span class="stat-number">$187,500</span>
+                            <span class="stat-label">Raised So Far</span>
+                        </div>
+                        <div class="campaign-stat">
+                            <span class="stat-number">$250,000</span>
+                            <span class="stat-label">Goal Amount</span>
+                        </div>
+                        <div class="campaign-stat">
+                            <span class="stat-number">1,250</span>
+                            <span class="stat-label">Donors</span>
+                        </div>
+                        <div class="campaign-stat">
+                            <span class="stat-number">45</span>
+                            <span class="stat-label">Days Left</span>
+                        </div>
+                    </div>
+                    
+                    <div class="campaign-progress-bar">
+                        <div class="progress-info">
+                            <span><strong>Progress:</strong></span>
+                            <span><strong>75% Complete</strong></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="75%" style="width: 0;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Form -->
+        <section class="section">
+            <div class="container">
+                <div class="donation-form-container">
+                    <div class="form-header">
+                        <h2>Secure Donation Form</h2>
+                        <p>Every donation, no matter the size, makes a real difference in someone's life.</p>
+                    </div>
+                    
+                    <div class="form-content">
+                        <form id="donation-form" novalidate>
+                            <!-- Amount Selection -->
+                            <div class="amount-selection">
+                                <h3>Select Donation Amount</h3>
+                                <div class="amount-buttons">
+                                    <button type="button" class="amount-btn" data-amount="25">
+                                        <span class="amount">$25</span>
+                                        <span class="description">School supplies for 1 child</span>
+                                    </button>
+                                    <button type="button" class="amount-btn" data-amount="50">
+                                        <span class="amount">$50</span>
+                                        <span class="description">Clean water for 1 family</span>
+                                    </button>
+                                    <button type="button" class="amount-btn" data-amount="100">
+                                        <span class="amount">$100</span>
+                                        <span class="description">Medical care for 1 family</span>
+                                    </button>
+                                    <button type="button" class="amount-btn" data-amount="250">
+                                        <span class="amount">$250</span>
+                                        <span class="description">1 child's annual education</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="custom-amount">
+                                    <label for="custom-amount">Or enter custom amount (USD)</label>
+                                    <input type="number" id="custom-amount" name="amount" class="custom-amount-input" placeholder="Enter amount" min="1" step="0.01" required>
+                                </div>
+                            </div>
+
+                            <!-- Donation Type -->
+                            <div class="donation-type">
+                                <h3>Donation Frequency</h3>
+                                <div class="donation-frequency">
+                                    <div class="frequency-option">
+                                        <input type="radio" id="one-time" name="frequency" value="one-time" checked>
+                                        <label for="one-time" class="frequency-label">
+                                            <strong>One-Time</strong>
+                                            <span>Make a single donation</span>
+                                        </label>
+                                    </div>
+                                    <div class="frequency-option">
+                                        <input type="radio" id="monthly" name="frequency" value="monthly">
+                                        <label for="monthly" class="frequency-label">
+                                            <strong>Monthly</strong>
+                                            <span>Ongoing monthly support</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Methods -->
+                            <div class="payment-methods">
+                                <h3>Payment Method</h3>
+                                <div class="payment-options">
+                                    <div class="payment-option">
+                                        <input type="radio" id="credit-card" name="payment-method" value="credit-card" checked>
+                                        <label for="credit-card" class="payment-label">
+                                            <div class="payment-icon">💳</div>
+                                            <span>Credit Card</span>
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="paypal" name="payment-method" value="paypal">
+                                        <label for="paypal" class="payment-label">
+                                            <div class="payment-icon">🅿️</div>
+                                            <span>PayPal</span>
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="mpesa" name="payment-method" value="mpesa">
+                                        <label for="mpesa" class="payment-label">
+                                            <div class="payment-icon">📱</div>
+                                            <span>M-Pesa</span>
+                                        </label>
+                                    </div>
+                                    <div class="payment-option">
+                                        <input type="radio" id="bank-transfer" name="payment-method" value="bank-transfer">
+                                        <label for="bank-transfer" class="payment-label">
+                                            <div class="payment-icon">🏦</div>
+                                            <span>Bank Transfer</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Details -->
+                                <div id="credit-card-details" class="payment-details active">
+                                    <h4>Credit Card Information</h4>
+                                    <div class="form-group">
+                                        <label for="card-number">Card Number</label>
+                                        <input type="text" id="card-number" name="card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+                                    </div>
+                                    <div class="card-inputs">
+                                        <div class="form-group">
+                                            <label for="card-name">Name on Card</label>
+                                            <input type="text" id="card-name" name="card-name" class="form-input" placeholder="John Doe">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card-expiry">Expiry Date</label>
+                                            <input type="text" id="card-expiry" name="card-expiry" class="form-input" placeholder="MM/YY" maxlength="5">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card-cvv">CVV</label>
+                                            <input type="text" id="card-cvv" name="card-cvv" class="form-input" placeholder="123" maxlength="4">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="paypal-details" class="payment-details">
+                                    <h4>PayPal</h4>
+                                    <p>You will be redirected to PayPal to complete your donation securely.</p>
+                                </div>
+
+                                <div id="mpesa-details" class="payment-details">
+                                    <h4>M-Pesa Payment</h4>
+                                    <div class="mpesa-input">
+                                        <label for="mpesa-number">M-Pesa Phone Number</label>
+                                        <input type="tel" id="mpesa-number" name="mpesa-number" class="form-input" placeholder="+254 700 123 456">
+                                    </div>
+                                    <p><small>You will receive an STK push notification to complete the payment.</small></p>
+                                </div>
+
+                                <div id="bank-transfer-details" class="payment-details">
+                                    <h4>Bank Transfer Details</h4>
+                                    <p><strong>Account Name:</strong> Mbua Nene Initiative<br>
+                                    <strong>Bank:</strong> Kenya Commercial Bank<br>
+                                    <strong>Account Number:</strong> 1234567890<br>
+                                    <strong>Swift Code:</strong> KCBLKENX</p>
+                                    <p><small>Please use your email as the reference and notify us once transfer is complete.</small></p>
+                                </div>
+                            </div>
+
+                            <!-- Personal Information -->
+                            <div class="personal-info">
+                                <h3>Your Information</h3>
+                                <div class="name-inputs">
+                                    <div class="form-group">
+                                        <label for="first-name">First Name *</label>
+                                        <input type="text" id="first-name" name="first-name" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name *</label>
+                                        <input type="text" id="last-name" name="last-name" class="form-input" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number (Optional)</label>
+                                    <input type="tel" id="phone" name="phone" class="form-input">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select id="country" name="country" class="form-select">
+                                        <option value="">Select Country</option>
+                                        <option value="KE">Kenya</option>
+                                        <option value="US">United States</option>
+                                        <option value="GB">United Kingdom</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="FR">France</option>
+                                        <option value="NL">Netherlands</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" name="newsletter" value="yes" style="margin-right: 0.5rem;">
+                                        Send me updates about Mbua Nene Initiative's work (optional)
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" name="anonymous" value="yes" style="margin-right: 0.5rem;">
+                                        Make this donation anonymous
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Security Information -->
+                            <div class="security-info">
+                                <h4>🔒 Your Security is Our Priority</h4>
+                                <div class="security-features">
+                                    <div class="security-feature">
+                                        <span class="security-icon">🛡️</span>
+                                        <span>256-bit SSL encryption</span>
+                                    </div>
+                                    <div class="security-feature">
+                                        <span class="security-icon">✅</span>
+                                        <span>PCI DSS compliant</span>
+                                    </div>
+                                    <div class="security-feature">
+                                        <span class="security-icon">🔐</span>
+                                        <span>Secure payment processing</span>
+                                    </div>
+                                    <div class="security-feature">
+                                        <span class="security-icon">📊</span>
+                                        <span>100% transparency</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">
+                                Complete Secure Donation
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Information -->
+        <section class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Your Impact</h2>
+                    <p>See exactly how your donation creates real change in communities across Kenya.</p>
+                </div>
+                
+                <div class="grid grid-4">
+                    <div class="card text-center">
+                        <h3 style="color: var(--primary-green);">$10</h3>
+                        <p>Provides nutritious meals for one child for a week</p>
+                    </div>
+                    <div class="card text-center">
+                        <h3 style="color: var(--primary-green);">$25</h3>
+                        <p>Supplies textbooks and learning materials for one student</p>
+                    </div>
+                    <div class="card text-center">
+                        <h3 style="color: var(--primary-green);">$75</h3>
+                        <p>Covers medical care and vaccination for a child</p>
+                    </div>
+                    <div class="card text-center">
+                        <h3 style="color: var(--primary-green);">$150</h3>
+                        <p>Installs a water purification system for a family</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Donation Success Modal -->
+    <div id="donation-success-modal" class="modal success-modal" role="dialog" aria-labelledby="success-title" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="success-icon">✓</div>
+            <h3 id="success-title">Thank You for Your Donation!</h3>
+            <p>Your generous support will help transform lives in communities across Kenya.</p>
+            
+            <div class="donation-summary">
+                <div class="summary-item">
+                    <span>Donation Amount:</span>
+                    <span class="donation-amount">$100.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Frequency:</span>
+                    <span class="donation-type">One-time</span>
+                </div>
+                <div class="summary-item">
+                    <span>Receipt:</span>
+                    <span>Emailed to you</span>
+                </div>
+            </div>
+            
+            <p><strong>What happens next?</strong></p>
+            <ul style="text-align: left; margin: 1rem 0;">
+                <li>You'll receive a confirmation email with your receipt</li>
+                <li>Your donation will be processed securely within 24 hours</li>
+                <li>We'll send updates showing the impact of your contribution</li>
+            </ul>
+            
+            <div style="margin-top: 2rem;">
+                <a href="projects.html" class="btn btn-primary" style="margin-right: 1rem;">See Your Impact</a>
+                <button class="btn btn-secondary" onclick="window.MbuaNeneInitiative.closeModal(document.getElementById('donation-success-modal'))">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mbua Nene Initiative</h3>
+                    <p>Empowering communities through education, healthcare, and sustainable development in Kenya.</p>
+                    <div class="social-links" style="margin-top: 1rem;">
+                        <a href="https://facebook.com/mbuaneneinitiative" aria-label="Follow us on Facebook" style="margin-right: 1rem;">
+                            <img src="/assets/icons/facebook.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://twitter.com/mbuaneneinitiative" aria-label="Follow us on Twitter" style="margin-right: 1rem;">
+                            <img src="/assets/icons/twitter.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://instagram.com/mbuaneneinitiative" aria-label="Follow us on Instagram">
+                            <img src="/assets/icons/instagram.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <nav aria-label="Footer navigation">
+                        <a href="about.html">About Us</a><br>
+                        <a href="projects.html">Our Projects</a><br>
+                        <a href="get-involved.html">Get Involved</a><br>
+                        <a href="donate.html">Donate</a><br>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Transparency</h3>
+                    <p>95% of donations go directly to programs</p>
+                    <p>Annual reports available</p>
+                    <p>Real-time impact tracking</p>
+                    <p>Third-party audited</p>
+                    <p><a href="#financial-report">View Financial Report</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@mbuaneneinitiative.org</p>
+                    <p>Phone: +254 700 123 456</p>
+                    <p>Address: Nairobi, Kenya</p>
+                    <p>Tax ID: 123-456-789</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mbua Nene Initiative. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

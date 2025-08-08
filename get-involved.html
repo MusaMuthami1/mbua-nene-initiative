@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get involved with Mbua Nene Initiative! Volunteer opportunities, upcoming events, and ways to support our mission in Kenya.">
+    <meta name="keywords" content="volunteer, get involved, events, community service, Kenya, charity work, volunteer opportunities">
+    <title>Get Involved - Volunteer & Events | Mbua Nene Initiative</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- Additional Get Involved Page Styles -->
+    <style>
+        /* Volunteer Opportunities Styles */
+        .volunteer-opportunities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .volunteer-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+        
+        .volunteer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .volunteer-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .volunteer-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .volunteer-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .volunteer-details {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .volunteer-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .volunteer-details li::before {
+            content: "✓";
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* Volunteer Form Styles */
+        .volunteer-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        
+        .volunteer-form-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .volunteer-form-header h2 {
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        .volunteer-form-content {
+            padding: 2rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .interest-option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .interest-option:hover {
+            border-color: var(--primary-green);
+            background: rgba(46, 139, 87, 0.05);
+        }
+        
+        .interest-option input[type="checkbox"] {
+            margin-right: 0.75rem;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .interest-option input[type="checkbox"]:checked + span {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+        
+        /* Events Styles */
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .event-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-date {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .event-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .event-details {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .event-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .event-details li::before {
+            content: "";
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        .event-details .time::before { content: "⏰"; }
+        .event-details .location::before { content: "📍"; }
+        .event-details .capacity::before { content: "👥"; }
+        .event-details .type::before { content: "🏷️"; }
+        
+        .event-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .status-available {
+            color: var(--primary-green);
+        }
+        
+        .status-filling {
+            color: var(--accent-orange);
+        }
+        
+        .status-full {
+            color: var(--medium-gray);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        /* Ways to Help Styles */
+        .help-ways {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .help-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+        
+        .help-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .help-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--white);
+            margin: 0 auto 1rem;
+        }
+        
+        .help-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .help-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .volunteer-form-content {
+                padding: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .events-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .help-ways {
+                grid-template-columns: 1fr;
+            }
+            
+            .volunteer-opportunities {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <img src="/assets/images/logo.png" alt="Mbua Nene Initiative Logo" width="40" height="40" style="display: none;">
+                Mbua Nene Initiative
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="get-involved.html" class="nav-link active" aria-current="page">Get Involved</a></li>
+                <li><a href="donate.html" class="nav-link btn btn-primary">Donate</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" style="padding: 6rem 0 4rem; background: linear-gradient(135deg, rgba(46, 139, 87, 0.9), rgba(60, 179, 113, 0.8)), url('/assets/images/volunteer-hero.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Get Involved</h1>
+                    <p>Join our community of dedicated volunteers and make a real difference in the lives of people across Kenya. Every skill, every hour, every contribution matters.</p>
+                    <div class="hero-cta">
+                        <a href="#volunteer-form" class="btn btn-accent btn-lg">Become a Volunteer</a>
+                        <a href="#events" class="btn btn-secondary btn-lg">View Events</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ways to Help -->
+        <section class="section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Ways You Can Help</h2>
+                    <p>There are many ways to support our mission, whether you have time, skills, or resources to share.</p>
+                </div>
+                
+                <div class="help-ways">
+                    <div class="help-card">
+                        <div class="help-icon">👥</div>
+                        <h3 class="help-title">Volunteer</h3>
+                        <p class="help-description">Join our team of volunteers and contribute your skills and time to make a direct impact in communities.</p>
+                        <a href="#volunteer-form" class="btn btn-primary">Sign Up</a>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">💰</div>
+                        <h3 class="help-title">Donate</h3>
+                        <p class="help-description">Make a financial contribution to support our projects and help us reach more communities in need.</p>
+                        <a href="donate.html" class="btn btn-primary">Donate Now</a>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">📢</div>
+                        <h3 class="help-title">Spread Awareness</h3>
+                        <p class="help-description">Share our mission with your network and help us reach more people who want to make a difference.</p>
+                        <a href="#share" class="btn btn-primary">Share</a>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">🤝</div>
+                        <h3 class="help-title">Partner</h3>
+                        <p class="help-description">Are you part of an organization? Partner with us to amplify our impact and reach.</p>
+                        <a href="#contact" class="btn btn-primary">Partner</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteer Opportunities -->
+        <section class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Volunteer Opportunities</h2>
+                    <p>Find the perfect way to contribute your skills and passion to our mission.</p>
+                </div>
+                
+                <div class="volunteer-opportunities">
+                    <div class="volunteer-card">
+                        <div class="volunteer-icon">👨‍⚕️</div>
+                        <h3 class="volunteer-title">Healthcare Volunteers</h3>
+                        <p class="volunteer-description">Support our mobile health clinics and community health programs by providing medical care and health education.</p>
+                        <ul class="volunteer-details">
+                            <li>Medical professionals preferred</li>
+                            <li>2-4 week commitments</li>
+                            <li>Travel to rural communities</li>
+                            <li>Training provided</li>
+                        </ul>
+                        <a href="#volunteer-form" class="btn btn-primary">Apply Now</a>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="volunteer-icon">👨‍🏫</div>
+                        <h3 class="volunteer-title">Education Specialists</h3>
+                        <p class="volunteer-description">Help develop curriculum, train teachers, and support educational programs in our partner schools.</p>
+                        <ul class="volunteer-details">
+                            <li>Teaching experience helpful</li>
+                            <li>Flexible scheduling</li>
+                            <li>Remote and on-site options</li>
+                            <li>English and Swahili speakers needed</li>
+                        </ul>
+                        <a href="#volunteer-form" class="btn btn-primary">Apply Now</a>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="volunteer-icon">🔧</div>
+                        <h3 class="volunteer-title">Construction & Engineering</h3>
+                        <p class="volunteer-description">Help build schools, health clinics, and water systems that serve as the foundation for community development.</p>
+                        <ul class="volunteer-details">
+                            <li>Construction or engineering background</li>
+                            <li>1-3 week projects</li>
+                            <li>Physical work required</li>
+                            <li>Work alongside local teams</li>
+                        </ul>
+                        <a href="#volunteer-form" class="btn btn-primary">Apply Now</a>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="volunteer-icon">💼</div>
+                        <h3 class="volunteer-title">Business Development</h3>
+                        <p class="volunteer-description">Support our microfinance programs and help community members develop sustainable businesses.</p>
+                        <ul class="volunteer-details">
+                            <li>Business or finance background</li>
+                            <li>Mentoring and training</li>
+                            <li>Remote support available</li>
+                            <li>Long-term commitment preferred</li>
+                        </ul>
+                        <a href="#volunteer-form" class="btn btn-primary">Apply Now</a>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="volunteer-icon">💻</div>
+                        <h3 class="volunteer-title">Digital & Communications</h3>
+                        <p class="volunteer-description">Help us tell our story, manage social media, develop websites, and create digital content.</p>
+                        <ul class="volunteer-details">
+                            <li>Digital marketing or tech skills</li>
+                            <li>Remote work opportunities</li>
+                            <li>Flexible time commitment</li>
+                            <li>Creative and technical roles</li>
+                        </ul>
+                        <a href="#volunteer-form" class="btn btn-primary">Apply Now</a>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="volunteer-icon">📊</div>
+                        <h3 class="volunteer-title">Research & Evaluation</h3>
+                        <p class="volunteer-description">Help us measure impact, conduct community assessments, and improve our programs through data analysis.</p>
+                        <ul class="volunteer-details">
+                            <li>Research or data analysis experience</li>
+                            <li>Field and remote work</li>
+                            <li>Graduate students welcome</li>
+                            <li>Contribute to reports and publications</li>
+                        </ul>
+                        <a href="#volunteer-form" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteer Sign-up Form -->
+        <section id="volunteer-form" class="section">
+            <div class="container">
+                <div class="volunteer-form-container">
+                    <div class="volunteer-form-header">
+                        <h2>Volunteer Application</h2>
+                        <p>Join our team and help us create lasting change in communities across Kenya.</p>
+                    </div>
+                    
+                    <div class="volunteer-form-content">
+                        <form id="volunteer-form-element" novalidate>
+                            <!-- Personal Information -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vol-first-name">First Name *</label>
+                                    <input type="text" id="vol-first-name" name="first-name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vol-last-name">Last Name *</label>
+                                    <input type="text" id="vol-last-name" name="last-name" class="form-input" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vol-email">Email Address *</label>
+                                    <input type="email" id="vol-email" name="email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vol-phone">Phone Number *</label>
+                                    <input type="tel" id="vol-phone" name="phone" class="form-input" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vol-country">Country *</label>
+                                    <select id="vol-country" name="country" class="form-select" required>
+                                        <option value="">Select Country</option>
+                                        <option value="KE">Kenya</option>
+                                        <option value="US">United States</option>
+                                        <option value="GB">United Kingdom</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="FR">France</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vol-age">Age Range *</label>
+                                    <select id="vol-age" name="age" class="form-select" required>
+                                        <option value="">Select Age Range</option>
+                                        <option value="18-25">18-25</option>
+                                        <option value="26-35">26-35</option>
+                                        <option value="36-45">36-45</option>
+                                        <option value="46-55">46-55</option>
+                                        <option value="56-65">56-65</option>
+                                        <option value="65+">65+</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Areas of Interest -->
+                            <div class="form-group">
+                                <label>Areas of Interest (Select all that apply) *</label>
+                                <div class="interests-grid">
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="healthcare">
+                                        <span>Healthcare & Medical</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="education">
+                                        <span>Education & Teaching</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="construction">
+                                        <span>Construction & Engineering</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="business">
+                                        <span>Business Development</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="technology">
+                                        <span>Technology & Digital</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="research">
+                                        <span>Research & Evaluation</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="fundraising">
+                                        <span>Fundraising & Events</span>
+                                    </label>
+                                    <label class="interest-option">
+                                        <input type="checkbox" name="interests" value="administration">
+                                        <span>Administration & Support</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Experience and Skills -->
+                            <div class="form-group">
+                                <label for="vol-experience">Relevant Experience & Skills</label>
+                                <textarea id="vol-experience" name="experience" class="form-textarea" rows="4" placeholder="Tell us about your relevant experience, skills, and qualifications..."></textarea>
+                            </div>
+                            
+                            <!-- Availability -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vol-availability">Availability *</label>
+                                    <select id="vol-availability" name="availability" class="form-select" required>
+                                        <option value="">Select Availability</option>
+                                        <option value="1-2-weeks">1-2 weeks</option>
+                                        <option value="1-month">1 month</option>
+                                        <option value="2-3-months">2-3 months</option>
+                                        <option value="6-months">6 months</option>
+                                        <option value="1-year">1 year or more</option>
+                                        <option value="ongoing">Ongoing (flexible)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vol-preferred-start">Preferred Start Date</label>
+                                    <input type="date" id="vol-preferred-start" name="preferred-start" class="form-input">
+                                </div>
+                            </div>
+                            
+                            <!-- Languages -->
+                            <div class="form-group">
+                                <label for="vol-languages">Languages Spoken</label>
+                                <input type="text" id="vol-languages" name="languages" class="form-input" placeholder="e.g., English (fluent), Swahili (basic), French (conversational)">
+                            </div>
+                            
+                            <!-- Motivation -->
+                            <div class="form-group">
+                                <label for="vol-motivation">Why do you want to volunteer with us? *</label>
+                                <textarea id="vol-motivation" name="motivation" class="form-textarea" rows="4" placeholder="Tell us what motivates you to volunteer and how you hope to contribute..." required></textarea>
+                            </div>
+                            
+                            <!-- References -->
+                            <div class="form-group">
+                                <label for="vol-references">References (Optional)</label>
+                                <textarea id="vol-references" name="references" class="form-textarea" rows="3" placeholder="Please provide contact information for 1-2 references (name, relationship, email, phone)"></textarea>
+                            </div>
+                            
+                            <!-- Consent and Agreements -->
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="background-check" value="yes" style="margin-right: 0.5rem;" required>
+                                    I consent to a background check if required for my volunteer role *
+                                </label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="terms" value="yes" style="margin-right: 0.5rem;" required>
+                                    I agree to the volunteer terms and conditions *
+                                </label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="updates" value="yes" style="margin-right: 0.5rem;">
+                                    Send me updates about volunteer opportunities and events
+                                </label>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">
+                                Submit Volunteer Application
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Events -->
+        <section id="events" class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Upcoming Events</h2>
+                    <p>Join us at our upcoming events and be part of our community of changemakers.</p>
+                </div>
+                
+                <div class="events-container">
+                    <article class="event-card">
+                        <img src="/assets/images/event-fundraising.jpg" alt="Annual Fundraising Gala" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">March 15, 2024</span>
+                            <h3 class="event-title">Annual Fundraising Gala</h3>
+                            <p class="event-description">Join us for an elegant evening of dining, entertainment, and fundraising to support our education programs.</p>
+                            <ul class="event-details">
+                                <li class="time">6:00 PM - 11:00 PM</li>
+                                <li class="location">Nairobi Serena Hotel</li>
+                                <li class="capacity">200 attendees</li>
+                                <li class="type">Fundraising Event</li>
+                            </ul>
+                            <div class="event-status status-available">
+                                <span class="status-dot"></span>
+                                Tickets Available
+                            </div>
+                            <a href="#register" class="btn btn-primary">Register Now</a>
+                        </div>
+                    </article>
+
+                    <article class="event-card">
+                        <img src="/assets/images/event-volunteer-day.jpg" alt="Community Volunteer Day" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">March 22, 2024</span>
+                            <h3 class="event-title">Community Volunteer Day</h3>
+                            <p class="event-description">Hands-on volunteer work building playground equipment for a primary school in Kiambu County.</p>
+                            <ul class="event-details">
+                                <li class="time">8:00 AM - 4:00 PM</li>
+                                <li class="location">Kiambu, Kenya</li>
+                                <li class="capacity">30 volunteers</li>
+                                <li class="type">Volunteer Work</li>
+                            </ul>
+                            <div class="event-status status-filling">
+                                <span class="status-dot"></span>
+                                Filling Fast
+                            </div>
+                            <a href="#register" class="btn btn-primary">Join Us</a>
+                        </div>
+                    </article>
+
+                    <article class="event-card">
+                        <img src="/assets/images/event-health-camp.jpg" alt="Health Camp Organization" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">April 5, 2024</span>
+                            <h3 class="event-title">Mobile Health Camp</h3>
+                            <p class="event-description">Volunteer with our medical team to provide health screenings and care in rural Nakuru.</p>
+                            <ul class="event-details">
+                                <li class="time">7:00 AM - 5:00 PM</li>
+                                <li class="location">Nakuru County</li>
+                                <li class="capacity">15 volunteers</li>
+                                <li class="type">Medical Volunteer</li>
+                            </ul>
+                            <div class="event-status status-available">
+                                <span class="status-dot"></span>
+                                Spots Available
+                            </div>
+                            <a href="#register" class="btn btn-primary">Sign Up</a>
+                        </div>
+                    </article>
+
+                    <article class="event-card">
+                        <img src="/assets/images/event-training.jpg" alt="Volunteer Training Workshop" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">April 12, 2024</span>
+                            <h3 class="event-title">Volunteer Training Workshop</h3>
+                            <p class="event-description">Comprehensive training for new volunteers covering cultural sensitivity, project protocols, and safety.</p>
+                            <ul class="event-details">
+                                <li class="time">9:00 AM - 3:00 PM</li>
+                                <li class="location">Nairobi Office</li>
+                                <li class="capacity">25 participants</li>
+                                <li class="type">Training Event</li>
+                            </ul>
+                            <div class="event-status status-available">
+                                <span class="status-dot"></span>
+                                Open Registration
+                            </div>
+                            <a href="#register" class="btn btn-primary">Register</a>
+                        </div>
+                    </article>
+
+                    <article class="event-card">
+                        <img src="/assets/images/event-water-project.jpg" alt="Water Well Installation" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">April 20, 2024</span>
+                            <h3 class="event-title">Water Well Installation</h3>
+                            <p class="event-description">Join our engineering team for the installation of a new water well serving 500 community members.</p>
+                            <ul class="event-details">
+                                <li class="time">3-day project</li>
+                                <li class="location">Meru County</li>
+                                <li class="capacity">12 volunteers</li>
+                                <li class="type">Construction Project</li>
+                            </ul>
+                            <div class="event-status status-filling">
+                                <span class="status-dot"></span>
+                                Limited Spots
+                            </div>
+                            <a href="#register" class="btn btn-primary">Apply</a>
+                        </div>
+                    </article>
+
+                    <article class="event-card">
+                        <img src="/assets/images/event-graduation.jpg" alt="Student Graduation Ceremony" class="event-image">
+                        <div class="event-content">
+                            <span class="event-date">May 10, 2024</span>
+                            <h3 class="event-title">Student Graduation Ceremony</h3>
+                            <p class="event-description">Celebrate with students graduating from our vocational training programs and scholarship recipients.</p>
+                            <ul class="event-details">
+                                <li class="time">10:00 AM - 2:00 PM</li>
+                                <li class="location">Kiambu Community Center</li>
+                                <li class="capacity">100 attendees</li>
+                                <li class="type">Celebration Event</li>
+                            </ul>
+                            <div class="event-status status-available">
+                                <span class="status-dot"></span>
+                                All Welcome
+                            </div>
+                            <a href="#register" class="btn btn-primary">Attend</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact and Support -->
+        <section class="section">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Questions About Volunteering?</h2>
+                    <p class="mb-4">Our volunteer coordinator is here to help you find the perfect opportunity to make a difference.</p>
+                    
+                    <div class="grid grid-2" style="align-items: center; max-width: 800px; margin: 0 auto;">
+                        <div>
+                            <h3>Contact Our Team</h3>
+                            <p><strong>Jane Mutua</strong><br>Community Outreach Director</p>
+                            <p>📧 volunteers@mbuaneneinitiative.org<br>
+                            📞 +254 700 123 456<br>
+                            💬 Available Mon-Fri 8AM-5PM</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="mailto:volunteers@mbuaneneinitiative.org" class="btn btn-accent btn-lg">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mbua Nene Initiative</h3>
+                    <p>Empowering communities through education, healthcare, and sustainable development in Kenya.</p>
+                    <div class="social-links" style="margin-top: 1rem;">
+                        <a href="https://facebook.com/mbuaneneinitiative" aria-label="Follow us on Facebook" style="margin-right: 1rem;">
+                            <img src="/assets/icons/facebook.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://twitter.com/mbuaneneinitiative" aria-label="Follow us on Twitter" style="margin-right: 1rem;">
+                            <img src="/assets/icons/twitter.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://instagram.com/mbuaneneinitiative" aria-label="Follow us on Instagram">
+                            <img src="/assets/icons/instagram.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <nav aria-label="Footer navigation">
+                        <a href="about.html">About Us</a><br>
+                        <a href="projects.html">Our Projects</a><br>
+                        <a href="get-involved.html">Get Involved</a><br>
+                        <a href="donate.html">Donate</a><br>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Volunteer Info</h3>
+                    <p>Training provided for all roles</p>
+                    <p>Flexible time commitments</p>
+                    <p>Remote and on-site opportunities</p>
+                    <p>Professional development support</p>
+                    <p><a href="#volunteer-handbook">Volunteer Handbook</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: volunteers@mbuaneneinitiative.org</p>
+                    <p>Phone: +254 700 123 456</p>
+                    <p>Address: Nairobi, Kenya</p>
+                    <p>Hours: Mon-Fri 8AM-5PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mbua Nene Initiative. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#volunteer-terms">Volunteer Terms</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
