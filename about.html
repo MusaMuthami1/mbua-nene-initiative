@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Mbua Nene Initiative's mission, vision, values, and the dedicated team working to empower communities in Kenya.">
+    <meta name="keywords" content="about us, mission, vision, values, team, leadership, Kenya charity, community development">
+    <title>About Us - Mbua Nene Initiative</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- Additional About Page Styles -->
+    <style>
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary-green);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 1rem 2rem;
+            position: relative;
+            background: inherit;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .timeline-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: var(--primary-green);
+            border: 4px solid var(--white);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background: var(--white);
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: -15px;
+            border: 15px solid transparent;
+            border-left-color: var(--white);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: -15px;
+            border: 15px solid transparent;
+            border-right-color: var(--white);
+        }
+        
+        .timeline-year {
+            color: var(--primary-green);
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Team Member Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-member {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .team-member-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .team-member:hover .team-member-image {
+            transform: scale(1.1);
+        }
+        
+        .team-member-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-member-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member-role {
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .team-member-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .team-member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .team-member-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+        
+        .team-member-social a:hover {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Values Cards */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .value-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .value-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Mobile Timeline */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 3rem;
+                padding-right: 1rem;
+            }
+            
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid var(--white);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--white) transparent transparent;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+            
+            .timeline-item::after {
+                left: 10px;
+            }
+            
+            .timeline-item:nth-child(even)::after {
+                left: 10px;
+            }
+            
+            .timeline-content::after {
+                display: none;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav container" role="navigation" aria-label="Main navigation">
+            <div class="logo">
+                <img src="/assets/images/logo.png" alt="Mbua Nene Initiative Logo" width="40" height="40" style="display: none;">
+                Mbua Nene Initiative
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active" aria-current="page">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="get-involved.html" class="nav-link">Get Involved</a></li>
+                <li><a href="donate.html" class="nav-link btn btn-primary">Donate</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" style="padding: 6rem 0 4rem; background: linear-gradient(135deg, rgba(46, 139, 87, 0.9), rgba(60, 179, 113, 0.8)), url('/assets/images/about-hero.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>About Our Mission</h1>
+                    <p>Discover the story behind Mbua Nene Initiative and our commitment to empowering communities across Kenya through sustainable development programs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission, Vision, Values -->
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-3">
+                    <div class="card text-center">
+                        <div class="value-icon">🎯</div>
+                        <h3>Our Mission</h3>
+                        <p>To empower underserved communities in Kenya through comprehensive programs in education, healthcare, and sustainable development, creating lasting positive change.</p>
+                    </div>
+                    
+                    <div class="card text-center">
+                        <div class="value-icon">👁️</div>
+                        <h3>Our Vision</h3>
+                        <p>A Kenya where every community has access to quality education, healthcare, and economic opportunities, enabling them to thrive and prosper.</p>
+                    </div>
+                    
+                    <div class="card text-center">
+                        <div class="value-icon">❤️</div>
+                        <h3>Our Purpose</h3>
+                        <p>To bridge the gap between potential and opportunity, ensuring that geographical location or economic status never limits a person's access to basic human needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Our Journey</h2>
+                    <p>From humble beginnings to impacting thousands of lives across Kenya.</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2020</div>
+                            <h3>Foundation</h3>
+                            <p>Mbua Nene Initiative was founded by a group of passionate individuals committed to addressing the challenges facing rural communities in Kenya.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2021</div>
+                            <h3>First School Project</h3>
+                            <p>Successfully built our first primary school in Kiambu County, providing education access to over 200 children in the community.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2022</div>
+                            <h3>Healthcare Expansion</h3>
+                            <p>Launched mobile health clinics program, bringing medical services to 15 remote communities across three counties.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023</div>
+                            <h3>Water Initiative</h3>
+                            <p>Completed 25 water well projects, providing clean water access to over 5,000 community members.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <h3>Sustainable Growth</h3>
+                            <p>Expanded to 45 communities with 15 active projects, transforming over 2,500 lives through our comprehensive programs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team -->
+        <section class="section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Our Leadership Team</h2>
+                    <p>Meet the dedicated individuals leading our mission to empower communities across Kenya.</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="/assets/images/team-sarah.jpg" alt="Sarah Mwangi, Executive Director" class="team-member-image">
+                        <div class="team-member-content">
+                            <h3 class="team-member-name">Sarah Mwangi</h3>
+                            <p class="team-member-role">Executive Director</p>
+                            <p class="team-member-bio">With over 15 years of experience in international development, Sarah leads our strategic initiatives and community partnerships.</p>
+                            <div class="team-member-social">
+                                <a href="#" aria-label="Sarah's LinkedIn">📧</a>
+                                <a href="#" aria-label="Sarah's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/assets/images/team-david.jpg" alt="Dr. David Ochieng, Medical Director" class="team-member-image">
+                        <div class="team-member-content">
+                            <h3 class="team-member-name">Dr. David Ochieng</h3>
+                            <p class="team-member-role">Medical Director</p>
+                            <p class="team-member-bio">A practicing physician and public health expert, Dr. Ochieng oversees all our healthcare programs and mobile clinic operations.</p>
+                            <div class="team-member-social">
+                                <a href="#" aria-label="Dr. David's Email">📧</a>
+                                <a href="#" aria-label="Dr. David's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/assets/images/team-grace.jpg" alt="Grace Kiprotich, Education Coordinator" class="team-member-image">
+                        <div class="team-member-content">
+                            <h3 class="team-member-name">Grace Kiprotich</h3>
+                            <p class="team-member-role">Education Coordinator</p>
+                            <p class="team-member-bio">Former teacher and education policy advocate, Grace manages our school construction and educational support programs.</p>
+                            <div class="team-member-social">
+                                <a href="#" aria-label="Grace's Email">📧</a>
+                                <a href="#" aria-label="Grace's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/assets/images/team-michael.jpg" alt="Michael Wanjiku, Operations Manager" class="team-member-image">
+                        <div class="team-member-content">
+                            <h3 class="team-member-name">Michael Wanjiku</h3>
+                            <p class="team-member-role">Operations Manager</p>
+                            <p class="team-member-bio">Engineering background with expertise in water systems and infrastructure development, ensuring project quality and sustainability.</p>
+                            <div class="team-member-social">
+                                <a href="#" aria-label="Michael's Email">📧</a>
+                                <a href="#" aria-label="Michael's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/assets/images/team-jane.jpg" alt="Jane Mutua, Community Outreach Director" class="team-member-image">
+                        <div class="team-member-content">
+                            <h3 class="team-member-name">Jane Mutua</h3>
+                            <p class="team-member-role">Community Outreach Director</p>
+                            <p class="team-member-bio">Passionate about grassroots organizing, Jane builds relationships with community leaders and manages volunteer programs.</p>
+                            <div class="team-member-social">
+                                <a href="#" aria-label="Jane's Email">📧</a>
+                                <a href="#" aria-label="Jane's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="/assets/images/team-peter.jpg" alt="Peter Kamau, Finance Director" class="team-member-image">
+                        <div class="team-member-content">
+                            <h3 class="team-member-name">Peter Kamau</h3>
+                            <p class="team-member-role">Finance Director</p>
+                            <p class="team-member-bio">CPA with extensive nonprofit financial management experience, ensuring transparency and accountability in all our operations.</p>
+                            <div class="team-member-social">
+                                <a href="#" aria-label="Peter's Email">📧</a>
+                                <a href="#" aria-label="Peter's LinkedIn">💼</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values -->
+        <section class="section" style="background: var(--light-gray);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Our Core Values</h2>
+                    <p>The principles that guide everything we do in our mission to empower communities.</p>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3 class="value-title">Community Partnership</h3>
+                        <p class="value-description">We work with communities, not for them. Every project begins with listening to local needs and involving community members in planning and implementation.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🌱</div>
+                        <h3 class="value-title">Sustainability</h3>
+                        <p class="value-description">We focus on long-term solutions that communities can maintain and grow independently, ensuring lasting impact beyond our direct involvement.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🔍</div>
+                        <h3 class="value-title">Transparency</h3>
+                        <p class="value-description">We maintain open communication about our operations, finances, and impact, building trust with communities, donors, and partners.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">⚡</div>
+                        <h3 class="value-title">Innovation</h3>
+                        <p class="value-description">We embrace creative solutions and adapt our approaches based on what works best for each unique community and challenge we address.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3 class="value-title">Impact Focus</h3>
+                        <p class="value-description">Every decision we make is guided by its potential to create meaningful, measurable improvement in the lives of community members.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🌍</div>
+                        <h3 class="value-title">Cultural Respect</h3>
+                        <p class="value-description">We honor and celebrate the rich cultural heritage of the communities we serve, ensuring our programs complement local traditions and values.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Join Our Mission</h2>
+                    <p class="mb-4">Be part of the change you want to see in the world. Together, we can empower more communities and create lasting impact.</p>
+                    
+                    <div class="flex-center" style="gap: 1rem; flex-wrap: wrap;">
+                        <a href="donate.html" class="btn btn-accent btn-lg">Support Our Work</a>
+                        <a href="get-involved.html" class="btn btn-secondary btn-lg">Become a Volunteer</a>
+                        <a href="projects.html" class="btn btn-primary btn-lg">See Our Projects</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mbua Nene Initiative</h3>
+                    <p>Empowering communities through education, healthcare, and sustainable development in Kenya.</p>
+                    <div class="social-links" style="margin-top: 1rem;">
+                        <a href="https://facebook.com/mbuaneneinitiative" aria-label="Follow us on Facebook" style="margin-right: 1rem;">
+                            <img src="/assets/icons/facebook.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://twitter.com/mbuaneneinitiative" aria-label="Follow us on Twitter" style="margin-right: 1rem;">
+                            <img src="/assets/icons/twitter.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                        <a href="https://instagram.com/mbuaneneinitiative" aria-label="Follow us on Instagram">
+                            <img src="/assets/icons/instagram.svg" alt="" width="24" height="24" style="filter: brightness(0) invert(1);">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <nav aria-label="Footer navigation">
+                        <a href="about.html">About Us</a><br>
+                        <a href="projects.html">Our Projects</a><br>
+                        <a href="get-involved.html">Get Involved</a><br>
+                        <a href="donate.html">Donate</a><br>
+                        <a href="#contact">Contact</a>
+                    </nav>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Focus Areas</h3>
+                    <p>Education & Literacy</p>
+                    <p>Healthcare Access</p>
+                    <p>Clean Water & Sanitation</p>
+                    <p>Economic Development</p>
+                    <p>Women's Empowerment</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@mbuaneneinitiative.org</p>
+                    <p>Phone: +254 700 123 456</p>
+                    <p>Address: Nairobi, Kenya</p>
+                    <p>Hours: Mon-Fri 8AM-5PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mbua Nene Initiative. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
