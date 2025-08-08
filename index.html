@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mbua Nene Initiative</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">Mbua Nene Initiative</h1>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Empowering Communities Through Education</h1>
+                    <p class="hero-subtitle">Join us in building a brighter future for children and families through sustainable educational programs and community development.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary">Get Involved</button>
+                        <button class="btn-secondary">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-image-container">
+                    <div class="hero-image">
+                        <!-- Placeholder for main hero image -->
+                        <img src="assets/hero-image.svg" alt="Mbua Nene Initiative community impact" class="main-hero-img">
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="decorative-circle circle-1"></div>
+                    <div class="decorative-circle circle-2"></div>
+                    <div class="decorative-shape shape-1"></div>
+                    <div class="decorative-shape shape-2"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.hero-image, .decorative-circle, .decorative-shape, .hero-content');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
